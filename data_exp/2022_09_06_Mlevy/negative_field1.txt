@@ -1,0 +1,18 @@
+Icme in film between sqares
+pump - 2f modulated linear pol 31 mW
+probe 3 mW
+signal 500mV, ref 1200 mV
+H - -100 mT
+
+
+
+Delay line scan
+Start 170,7850 mm  
+Stop 490,0000 mm  
+Step 0,5000 mm  
+PEM Retardation (lambda)0
+ (%) 100,0000
+Wavelength (nm) 820,00
+7230 2w 500 mkV 100 ms -129° 2w  1 mV 100 ms -1°
+ mm  X1_Calibrated  µVY1_Calibrated  µVADC_1  V Ref_Frequency 1  
+Number of scans 4
