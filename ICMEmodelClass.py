@@ -37,16 +37,16 @@ class ICMEmodel:
 
     # get solution for selected lambda
 
-    def sol_mode_eq(self, lam, mode='TE'):
+    def sol_mode_eq(self, lam, mode='TE', N=0):
         n1, n2, n3= self.n1, self.n2, self.n3
         mode_eq = self.TE_mode_eq if mode=='TE' else self.TM_mode_eq
         k = 2*np.pi/lam
-        n_l = np.max(n1, n3)
+        n_l = np.max((n1, n3))
         l_b = k*(n_l + 1e-3)
         r_b = k*(n2 - 1e-3)
         
-        if mode_eq(k, l_b)*mode_eq(k, r_b) < 0:
-            return opt.brentq(lambda x: mode_eq(k, x), l_b, r_b)
+        if mode_eq(k, l_b, N=N)*mode_eq(k, r_b, N=N) < 0:
+            return opt.brentq(lambda x: mode_eq(k, x, N=N), l_b, r_b)
         else:
             return None
 
@@ -131,5 +131,5 @@ class ICMEmodel:
         return (E1/norm, E2/norm, E3/norm)
 
     def get_icme_torque(self, E, H, M, phi):
-        itmoke = self.ICME_arbirtary_E(E, phi, M)
-        return np.cross(H, itmoke)
+        icme = self.ICME_arbirtary_E(E, phi, M)
+        return np.cross(H, np.array(icme).transpose())
