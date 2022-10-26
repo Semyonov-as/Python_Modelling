@@ -119,7 +119,7 @@ class ICMEmodel:
     def get_M_from_H(H, phi):
         h1, h2, h3 = H
         m1 = h1*np.cos(phi) + h2*np.sin(phi)
-        m2 = -h1*np.cos(phi) + h2*np.cos(phi)
+        m2 = -h1*np.sin(phi) + h2*np.cos(phi)
         m3 = h3
 
         return (m1, m2, m3)
