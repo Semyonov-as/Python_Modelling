@@ -9,7 +9,7 @@ class ICMEmodel:
         self.n3 = n3
         self.g1 = 107145
         self.g2 = 59525
-        self.g3 = 14880
+        self.g3 = 14880/2 #because in china results was just g3, but we use 2*g3
 
         self.g1 /= self.g3
         self.g2 /= self.g3
