@@ -56,7 +56,7 @@ class ICMEmodel:
         p = np.sqrt(beta**2 - (k*n1)**2)
         q = np.sqrt(-beta**2 + (k*n2)**2)
         
-        return (0, np.cos(q*z) + p/q*np.sin(q*z), 0)
+        return (0, np.cos(q*z) + q/p*np.sin(q*z), 0)
 
     def get_E_field_TM(self, beta, lam, z):
         n1, n2 = self.n1, self.n2
