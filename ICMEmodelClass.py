@@ -109,11 +109,18 @@ class ICMEmodel:
         return (Hx, Hy, Hz)
 
     @staticmethod
-    def get_H(H, psi, out_of_plane):
-        h1 = H*np.cos(psi)*np.cos(out_of_plane)
-        h2 = H*np.sin(psi)*np.cos(out_of_plane)
-        h3 = H*np.sin(out_of_plane)
+    def get_H(H, psi, eta):
+        h1 = H*np.cos(psi)*np.cos(eta)
+        h2 = H*np.sin(psi)*np.cos(eta)
+        h3 = H*np.sin(eta)
         return (h1, h2, h3)
+
+    @staticmethod
+    def get_E(E, ksi, theta):
+        e1 = E*np.cos(ksi)*np.cos(theta)
+        e2 = E*np.sin(ksi)*np.cos(theta)
+        e3 = E*np.sin(theta)
+        return (e1, e2, e3)
 
     @staticmethod
     def get_M_from_H(H, phi):
