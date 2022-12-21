@@ -140,3 +140,39 @@ class ICMEmodel:
     def get_icme_torque(self, E, H, M, phi):
         icme = self.ICME_arbirtary_E(E, phi, M)
         return np.cross(H, np.array(icme).transpose())
+
+
+    # Spin dynamics code
+
+    def A_n(self, n, lam, beta, N, mode='TE'):
+        if not n%2 and mode =='TE': #even
+            return self.A_n_TE_even(n, lam, beta, N)
+        elif not n%2 and mode == 'TM':
+            pass
+        elif n%2 and mode == 'TE': #odd
+            return self.A_n_TE_odd(n, lam, beta, N)
+        elif n%2 and mode == 'TM':
+            pass
+
+    def A_n_TE_even(self, n, lam, beta, N):
+        kz = np.sqrt((2*np.pi*self.n2/lam)**2 - beta**2)
+        alpha_TE = np.pi*N/2
+        if self.n1 != self.n3:
+            gamma1 = np.sqrt(beta**2 - (2*np.pi*self.n1/lam)**2)
+            gamma3 = np.sqrt(beta**2 - (2*np.pi*self.n3/lam)**2)
+            alpha_TE += 0.5*np.arctan(kz*(gamma1 - gamma3)/(kz**2 + gamma1*gamma3))
+        Kn = n*np.pi/self.width
+
+        return 4*kz*(-1)**(n//2)/(4*kz**2 - Kn**2)*np.sin(kz*self.width)*np.cos(2*alpha_TE)
+
+
+    def A_n_TE_odd(self, n, lam, beta, N):
+        kz = np.sqrt((2*np.pi*self.n2/lam)**2 - beta**2)
+        alpha_TE = np.pi*N/2
+        if self.n1 != self.n3:
+            gamma1 = np.sqrt(beta**2 - (2*np.pi*self.n1/lam)**2)
+            gamma3 = np.sqrt(beta**2 - (2*np.pi*self.n3/lam)**2)
+            alpha_TE += 0.5*np.arctan(kz*(gamma1 - gamma3)/(kz**2 + gamma1*gamma3))
+        Kn = n*np.pi/self.width
+
+        return 4*kz*(-1)**((n-1)//2)/(- 4*kz**2 + Kn**2)*np.sin(kz*self.width)*np.cos(2*alpha_TE)
